@@ -11,6 +11,14 @@ module.exports = {
       .then(() => res.status(201).send('Deleted All'))
       .catch(err => res.status(404).send('Error'));
   },
+  deleteOne: (req, res) => {
+    let { id } = req.query;
+    ProductDescription.findByIdAndRemove(id)
+      .then(() => {
+        res.status(202).send('Deleted dress');
+      })
+      .catch(err => res.status(404).send('Could not delete dress'));
+  },
   findOneRandom: (req, res) => {
     ProductDescription.aggregate([{ $sample: { size: 1 } }])
       .then(data => res.status(200).send(data))
@@ -26,5 +34,15 @@ module.exports = {
     ProductDescription.find({ _id })
       .then(data => res.status(200).send(data))
       .catch(err => res.status(404).send('Error'));
+  },
+  newDress: (req, res) => {
+    let { productName, designer, price, stars, reviews, description, fit, sizes, colors, 
+      imageUrlsColor1, imageUrlsColor2 } = req.body;
+    let options = { productName, designer, price, stars, reviews, description, fit, sizes, colors,
+      imageUrlsColor1, imageUrlsColor2 };
+    ProductDescription.create(options)
+      .then(() => res.status(201).send('Dress created'))
+      .catch(err => status(404).send('Could not create dress: ', err));
   }
+
 }

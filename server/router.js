@@ -22,7 +22,9 @@ router.route('/recommendation')
 router.route('/dress')
   .post(controller.newDress);
 
-// Delete one dress
+// Update dress
+router.route('/dress')
+  .patch(controller.editDress);
 
 
 module.exports = router;

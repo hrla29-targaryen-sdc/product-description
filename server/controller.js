@@ -43,6 +43,15 @@ module.exports = {
     ProductDescription.create(options)
       .then(() => res.status(201).send('Dress created'))
       .catch(err => status(404).send('Could not create dress: ', err));
+  },
+  editDress: (req, res) => {
+    let { _id, productName, designer, price, stars, reviews, description, fit, sizes, colors, 
+      imageUrlsColor1, imageUrlsColor2 } = req.body;
+    let options = { _id, productName, designer, price, stars, reviews, description, fit, sizes, colors,
+      imageUrlsColor1, imageUrlsColor2 };
+    ProductDescription.findByIdAndUpdate(_id, options)
+      .then(() => res.status(200).send('Dress updated'))
+      .catch(err => status(404).send('Could not update dress: ', err));
   }
 
 }

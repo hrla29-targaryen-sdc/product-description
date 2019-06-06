@@ -6,7 +6,8 @@
   "scripts": {
     "dev:server": "nodemon server/index.js",
     "dev:setup": "webpack -d -w",
-    "seed": "node seeding/dataGenerator.js",
+    "generate-data": "node SDC_seeding/mongoGenerator.js",
+    "seed": "mongoimport --db productDescription --collection productdescriptions --jsonArray --file /Users/kathleenhogan/Desktop/Kathleen/HR/SDC/product-description/SDC_seeding/mongoData.json",
     "test": "jest",
     "test:w": "jest --watchAll",
     "test:c": "jest --coverage",

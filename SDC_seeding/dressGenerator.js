@@ -460,7 +460,7 @@ const generatePostgres = () => {
     // stars
   dress += Math.floor(Math.random() * (5 - 1)) + 1 + ' | ';
     // reviews
-  dress += Math.floor(Math.random() * (20 - 10)) + 10 + ' | ';    
+  dress += Math.floor(Math.random() * (20 - 10)) + 10;    
   
   return dress;
 }

@@ -24,6 +24,9 @@ const generateRecords = async () => {
 };
 
 dressData.write(
-  'name|sizes|description|color1|color2|color1images|color2images|designer|fit|price|stars|reviews\n',
+  'productName|sizes|description|color1|color2|imageUrlsColor1|imageUrlsColor1|designer|fit|price|stars|reviews\n',
   () => generateRecords()
 );
+
+// After generating, run below command in psql shell for db 'productDescriptions'
+// COPY products("productName","sizes","description","color1","color2","imageUrlsColor1","imageUrlsColor2","designer","fit","price","stars","reviews") from '/Users/kathleenhogan/Desktop/Kathleen/HR/SDC/product-description/SDC_seeding/Postgres/postgresData.csv' delimiter '|' CSV header;

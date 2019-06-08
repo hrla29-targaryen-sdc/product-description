@@ -18,6 +18,10 @@ router.route('/findOneRandom')
 router.route('/recommendation')
   .get(controller.recommendation);
 
+// Find one dress by id 
+router.route('/dress')
+  .get(controller.findOne);
+
 // Create new dress
 router.route('/dress')
   .post(controller.newDress);

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('database', 'kathleenhogan', '', {
+const sequelize = new Sequelize('productDescriptions', 'kathleenhogan', '', {
   host: 'localhost',
   dialect: 'postgres'
 });
@@ -13,3 +13,5 @@ sequelize
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });
+
+module.exports = sequelize;

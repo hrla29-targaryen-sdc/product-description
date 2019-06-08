@@ -1,10 +1,32 @@
+const Sequelize = require('sequelize');
 const sequelize = require('./index.js');
 
 const Product = sequelize.define('product', {
   productName: {
     type: Sequelize.STRING
   },
+  sizes: {
+    type: Sequelize.ARRAY(Sequelize.STRING)
+  },
+  description: {
+    type: Sequelize.STRING
+  },
+  color1: {
+    type: Sequelize.STRING
+  },
+  color2: {
+    type: Sequelize.STRING
+  },
+  imageUrlsColor1: {
+    type: Sequelize.ARRAY(Sequelize.STRING)
+  },
+  imageUrlsColor2: {
+    type: Sequelize.ARRAY(Sequelize.STRING)
+  },
   designer: {
+    type: Sequelize.STRING
+  },
+  fit: {
     type: Sequelize.STRING
   },
   price: {
@@ -15,30 +37,11 @@ const Product = sequelize.define('product', {
   },
   reviews: {
     type: Sequelize.INTEGER
-  },
-  description: {
-    type: Sequelize.STRING
-  },
-  fit: {
-    type: Sequelize.STRING
-  },
-  sizes: {
-    type: [Sequelize.STRING]
-  },
-  color1: {
-    type: Sequelize.STRING
-  },
-  color2: {
-    type: Sequelize.STRING
-  },
-  imageUrlsColor1: {
-    type: [Sequelize.STRING]
-  },
-  imageUrlsColor2: {
-    type: [Sequelize.STRING]
   }
+}, {
+  timestamps: false
 });
 
-Product.sync({ force: true });
+Product.sync();
 
 module.exports = Product;

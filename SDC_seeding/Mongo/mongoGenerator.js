@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const generateDress = require('./dressGenerator.js');
+const generate = require('../dressGenerator.js');
 
 let dressData = fs.createWriteStream(
   path.resolve(__dirname, './mongoData.json')
@@ -11,7 +11,7 @@ let startTime = (new Date).getTime();
 // generator
 const generateRecords = async () => {
   for (let i = 1; i <= 10000000; i++) {
-    let dress = generateDress();
+    let dress = generate.generateMongo();
     dress.ID = i;
     if (!dressData.write(JSON.stringify(dress) + (i === 10000000 ? ']' : ','))) {
       await new Promise(resolve => dressData.once('drain', resolve));

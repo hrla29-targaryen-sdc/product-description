@@ -1,4 +1,4 @@
-const ProductDescription = require('../database/models');
+const ProductDescription = require('../database/Mongo/models');
 
 module.exports = {
   findAll: (req, res) => {

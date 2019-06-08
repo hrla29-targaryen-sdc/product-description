@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const ProductDescription = require('../database/models');
-const dressData = require('./dressData.json');
+const dressData = require('./dressData.json.js');
 
 // Random Data Arrays
 const designers = ['Something Navy', 'Eliza J', 'Leith', 'Free People', 'BP.', 'Chelsea28', 'Harper Rose', 'Charles Henry', 'Rachel Parcell', 'Gibson', 'WAYF']

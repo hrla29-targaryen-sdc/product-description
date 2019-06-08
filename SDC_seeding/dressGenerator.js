@@ -408,11 +408,11 @@ const getRandomElement = array => {
   return array[i];
 };
 
-// create one dress record
-const generateDress = () => {
+// create one dress record for Mongo
+const generateMongo = () => {
   let dress = {};
   dress.name = getRandomElement(names);
-  dress.size = getRandomElement(sizes);
+  dress.sizes = sizes;
   dress.description = getRandomElement(descriptions);
   let colorWithImages = getRandomElement(colorsWithImages);
   dress.color1 = colorWithImages.colors[0];
@@ -434,4 +434,36 @@ const generateDress = () => {
   return dress;
 }
 
-module.exports = generateDress;
+// create one dress record for Postgres
+const generatePostgres = () => {
+  let dress = '';
+  dress += getRandomElement(names) + ' | ';
+  dress += '"{' + sizes + '}"' + ' | ';
+  dress += getRandomElement(descriptions) + ' | ';
+  let colorWithImages = getRandomElement(colorsWithImages);
+  dress += colorWithImages.colors[0] + ' | ';
+  if (colorWithImages.colors[1]) {
+    dress += colorWithImages.colors[1] + ' | ';
+  } else {
+    dress += ' | ';
+  }
+  dress += '"{' + colorWithImages.imageUrlsColor1 + '}"' + ' | ';
+  if (colorWithImages.imageUrlsColor2) {
+    dress += '"{' + colorWithImages.imageUrlsColor2 + '}"' + ' | ';
+  }
+  dress += getRandomElement(designers) + ' | ';
+  dress += getRandomElement(fits) + ' | ';
+
+  // get random numbers for non-string properties
+    // price 
+  dress += Math.floor(Math.random() * (300 - 100)) + 100 + ' | ';
+    // stars
+  dress += Math.floor(Math.random() * (5 - 1)) + 1 + ' | ';
+    // reviews
+  dress += Math.floor(Math.random() * (20 - 10)) + 10 + ' | ';    
+  
+  return dress;
+}
+
+module.exports.generateMongo = generateMongo;
+module.exports.generatePostgres = generatePostgres;

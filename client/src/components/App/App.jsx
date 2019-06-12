@@ -43,20 +43,25 @@ class App extends Component {
 
   fetchData() {
     axios.get('/productDescription/findOneRandom')
-      .then(data => this.setState({
-        productName: data.data[0].productName,
-        designer: data.data[0].designer,
-        price: data.data[0].price,
-        stars: data.data[0].stars,
-        reviews: data.data[0].reviews,
-        description: data.data[0].description,
-        fit: data.data[0].fit,
-        sizes: data.data[0].sizes,
-        colors: data.data[0].colors,
-        imageUrlsColor1: data.data[0].imageUrlsColor1,
-        imageUrlsColor2: data.data[0].imageUrlsColor2,
-        imageUrls: data.data[0].imageUrlsColor1,
-      }))
+      .then(data => {
+        let colors = [data.data.color1];
+        if(data.data.color2) {
+          colors.push(data.data.color2);
+        }
+        this.setState({
+        productName: data.data.name,
+        designer: data.data.designer,
+        price: data.data.price,
+        stars: data.data.stars,
+        reviews: data.data.reviews,
+        description: data.data.description,
+        fit: data.data.fit,
+        sizes: data.data.sizes,
+        colors: colors,
+        imageUrlsColor1: data.data.imageUrlsColor1,
+        imageUrlsColor2: data.data.imageUrlsColor2,
+        imageUrls: data.data.imageUrlsColor1,
+      })})
       .then(() => this.updateStarsArray())
       .then(() => this.updateColorSelectorArray())
       .catch(err => console.log(err));

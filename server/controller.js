@@ -26,7 +26,7 @@ module.exports = {
   },
   findOneRandom: (req, res) => {
     let ID = Math.floor(Math.random() * 10000000);
-    ProductDescription.findOne({ ID })
+    ProductDescription.find({ ID })
       .then(data => res.status(200).send(data))
       .catch(err => res.status(404).send('Error, could not fetch dress: ', err));
   },
@@ -38,7 +38,6 @@ module.exports = {
   // using dress.ID instead so we can query a dress in the 9-millions
   findOne: (req, res) => {
     const { ID } = req.query;
-    console.log(ID);
     ProductDescription.findOne({ ID })
       .then(data => res.status(200).send(data))
       .catch(err => res.status(404).send('Could not find dress: ', err));

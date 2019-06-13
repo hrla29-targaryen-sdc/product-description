@@ -16,7 +16,7 @@ const productDescriptionSchema = new mongoose.Schema({
   imageUrlsColor1: Array,
   imageUrlsColor2: Array,
   ID: Number
-});
+}, { collection: 'mongoData' });
 
 // Connecting the Product Descriptions Schema to the database
 const ProductDescription = mongoose.model('ProductDescriptions', productDescriptionSchema);

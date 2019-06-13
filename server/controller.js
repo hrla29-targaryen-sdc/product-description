@@ -25,10 +25,10 @@ module.exports = {
       .catch(err => res.status(404).send('Could not delete dress: ', err));
   },
   findOneRandom: (req, res) => {
-    let ID = Math.floor(Math.random() * 1000000 + 9000000);
+    let ID = Math.floor(Math.random() * 10000000);
     ProductDescription.findOne({ ID })
       .then(data => res.status(200).send(data))
-      .catch(err => res.status(404).send('Error'));
+      .catch(err => res.status(404).send('Error, could not fetch dress: ', err));
   },
   recommendation: (req, res) => {
     ProductDescription.aggregate([{ $sample: { size: 4 } }])

@@ -13,7 +13,10 @@ mongoose.set('useFindAndModify', false);
 let DB_URL = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@18.220.135.58/productDescription`;
 
 // Connecting our local storage db to our application with the db name productDescription
-const db = mongoose.connect(DB_URL, {useNewUrlParser: true});
+const db = mongoose.connect(DB_URL, {
+  useNewUrlParser: true,
+  useCreateIndex: true
+});
 
 mongoose.connection.once('open', () => {
   console.log('Connected to database!');

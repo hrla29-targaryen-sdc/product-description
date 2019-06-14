@@ -1,3 +1,16 @@
+const mongo = require('mongodb').MongoClient;
+const url = 'mongodb://ec2-18-220-135-58.us-east-2.compute.amazonaws.com';
+let db;
+
+mongo.connect(url,{ useNewUrlParser: true}, (err, client) => {
+  if (err) {
+    console.error(err);
+    return;
+  } else {
+    db = client.db('productDescription');
+  }
+})
+
 // Uncomment for Mongo
 const ProductDescription = require('../database/Mongo/models');
 // Uncomment for Postgres
@@ -24,11 +37,28 @@ module.exports = {
       })
       .catch(err => res.status(404).send('Could not delete dress: ', err));
   },
+  // the below worked before changing ID to _id
+  // findOneRandom: (req, res) => {
+  //   let id = Math.floor(Math.random() * 10000000);
+  //   ProductDescription.findById(id)
+  //     .then(data => res.status(200).send(data))
+  //     .catch(err => res.status(404).send(err));
+  // },
+  // --------------
+  // the below has been modified to not use Mongoose due to its bad handling of _id when not an ObjectId
   findOneRandom: (req, res) => {
-    let ID = Math.floor(Math.random() * 10000000);
-    ProductDescription.find({ _id: ID })
-      .then(data => res.status(200).send(data))
-      .catch(err => res.status(404).send('Error, could not fetch dress: ', err));
+    new Promise ((resolve, reject) => {
+      let id = Math.floor(Math.random() * 1000000 + 9000000);
+      db.collection('mongoData').findOne({_id: id}, (err, items) => {
+        if (err) {
+          reject({hello: 'hello world',...err});
+        } else {
+          resolve(items)
+        }
+      });
+    })
+    .then(data => res.status(200).send(data))
+    .catch(err => res.status(404).send(err));
   },
   recommendation: (req, res) => {
     ProductDescription.aggregate([{ $sample: { size: 4 } }])

@@ -44,6 +44,13 @@ module.exports = {
   //     .then(data => res.status(200).send(data))
   //     .catch(err => res.status(404).send(err));
   // },
+  // -------------
+  // the below worked but has been modified for speed
+  // recommendation: (req, res) => {
+  //   ProductDescription.aggregate([{ $sample: { size: 4 } }])
+  //   .then(data => res.status(200).send(data))
+  //   .catch(err => res.status(404).send('Error'));
+  // },
   // --------------
   // the below has been modified to not use Mongoose due to its bad handling of _id when not an ObjectId
   findOneRandom: (req, res) => {
@@ -53,17 +60,26 @@ module.exports = {
         if (err) {
           reject({hello: 'hello world',...err});
         } else {
-          resolve(items)
+          resolve(items);
         }
       });
     })
     .then(data => res.status(200).send(data))
     .catch(err => res.status(404).send(err));
   },
+  // the below has been modified for speed
   recommendation: (req, res) => {
-    ProductDescription.aggregate([{ $sample: { size: 4 } }])
+    new Promise ((resolve, reject) => {
+      db.collection('mongoData').aggregate([{ $sample: { size: 4 } }]).toArray((err, items) => {
+        if (err) {
+          reject({hello: 'hello world',...err});
+        } else {
+          resolve(items);
+        }
+      });
+    })
     .then(data => res.status(200).send(data))
-    .catch(err => res.status(404).send('Error'));
+    .catch(err => res.status(404).send(err));
   },
   // using dress.ID instead so we can query a dress in the 9-millions
   findOne: (req, res) => {

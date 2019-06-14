@@ -12,7 +12,7 @@ let startTime = (new Date).getTime();
 const generateRecords = async () => {
   for (let i = 1; i <= 10000000; i++) {
     let dress = generate.generateMongo();
-    dress.ID = i;
+    dress._id = i;
     if (!dressData.write(JSON.stringify(dress) + (i === 10000000 ? ']' : ','))) {
       await new Promise(resolve => dressData.once('drain', resolve));
     }

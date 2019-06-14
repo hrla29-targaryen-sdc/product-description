@@ -14,8 +14,7 @@ const productDescriptionSchema = new mongoose.Schema({
   color1: String,
   color2: String,
   imageUrlsColor1: Array,
-  imageUrlsColor2: Array,
-  ID: Number
+  imageUrlsColor2: Array
 }, { collection: 'mongoData' });
 
 // Connecting the Product Descriptions Schema to the database

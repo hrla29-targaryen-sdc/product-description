@@ -17,8 +17,8 @@ module.exports = {
       .catch(err => res.status(404).send('Could not delete all: ', err));
   },
   deleteOne: (req, res) => {
-    let { id } = req.query;
-    ProductDescription.findByIdAndRemove(id)
+    let _id = req.query.id;
+    ProductDescription.findByIdAndRemove(_id)
       .then(() => {
         res.status(202).send('Deleted dress');
       })
@@ -26,7 +26,7 @@ module.exports = {
   },
   findOneRandom: (req, res) => {
     let ID = Math.floor(Math.random() * 10000000);
-    ProductDescription.find({ ID })
+    ProductDescription.find({ _id: ID })
       .then(data => res.status(200).send(data))
       .catch(err => res.status(404).send('Error, could not fetch dress: ', err));
   },
@@ -37,8 +37,8 @@ module.exports = {
   },
   // using dress.ID instead so we can query a dress in the 9-millions
   findOne: (req, res) => {
-    const { ID } = req.query;
-    ProductDescription.findOne({ ID })
+    const _id = req.query.ID;
+    ProductDescription.findOne({ _id })
       .then(data => res.status(200).send(data))
       .catch(err => res.status(404).send('Could not find dress: ', err));
   },

@@ -56,7 +56,7 @@
     "env-cmd": "^9.0.3",
     "express": "^4.16.4",
     "mongodb": "^3.2.7",
-    "mongoose": "^5.5.8",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.19.0",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",

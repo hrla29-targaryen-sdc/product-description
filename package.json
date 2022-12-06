@@ -52,9 +52,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "env-cmd": "^9.0.3",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "mongodb": "^3.2.7",
     "mongoose": "^5.5.8",
     "nodemon": "^1.19.0",
